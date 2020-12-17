@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Grade Wise Salary</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>               
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <form th:action="@{/save-grade-salary}" th:object="${cmd}">
+
+                <table border="1" width="90%" align="center" cellpadding="5">
+
+                    <tr>
+                        <td class="fheading" colspan="4">Grade Wise Salary</td>
+                    </tr>
+
+                    <tr>
+                        <td>Employee Grade</td>
+                        <td>
+                            <input type="number" th:field="*{empGradeSalary}" required/>
+                            <input type="hidden" th:field="*{id}" />
+                        </td>
+                        <td>Salary</td>
+                        <td>
+                            <input type="text" th:field="*{empSalary}" required />
+                        </td>
+                    </tr>
+                    <tr>                       
+                        <td colspan="4">
+                            <button>Save</button>
+                        </td>                 
+                    </tr>
+                </table>
+            </form>
+            <br/>
+           <table border="1" width="90%" align="center" cellpadding="5">                         
+                <tr>                       
+                    <th >SR</th>
+                    <th hidden >ID</th>
+                    <th >Employee Grade</th>
+                    <th>Salary</th>
+                    <th>ACTION</th>                        
+                </tr>
+                <tr th:each="c,itr: ${gradeList}">
+                    <td style="text-align: center" th:text="${itr.count}">SR</td>
+                    <td hidden  th:text="${c.id}">ID</td>
+                    <td style="text-align: center" th:text="${c.empGradeSalary}">Employee Grade</td>
+                    <td style="text-align: right" th:text="${c.empSalary}">Salary</td>
+                    <td> <a th:href="@{'/grade-edit/'+${c.id}}">Edit</a> | <a th:href="@{'/grade-delete/'+${c.id}}">Delete</a></td>
+                </tr>
+            </table>
+            <br/>
+            <table border="1" width="90%" align="center"  cellpadding="5">
+                <tr>
+                    <th>Note :  Here 6 Grade is Lowest & 1 Grade is Highest ..</th>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

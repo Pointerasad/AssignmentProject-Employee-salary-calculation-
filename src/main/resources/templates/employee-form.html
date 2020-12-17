@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Employee Form</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>
+
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <form th:action="@{/save-employee}" th:object="${cmd}">
+                <table border="1" width="90%" align="center" cellpadding="5">     
+                    <tr>
+                        <td class="fheading"  colspan="4">Employee Form</td>
+                    </tr>
+                    <tr>
+                        <td>Employee Name</td>
+                        <td>
+                            <input type="text" th:field="*{employeeName}" required/>
+                            <input type="hidden" th:field="*{id}"/>
+                        </td>
+                        <td>Grade</td>
+                        <td width="50%"><input type="number" th:field="*{empGrade}" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile</td>
+                        <td><input type="text" th:field="*{empMobile}" required /></td>
+                        <td>Account Id</td>
+                        <td>
+                            <!--<input type="text" th:field="*{accountId}" required placeholder="Pls add account if don't have "/>-->
+                            <select th:field="*{accountId}">
+                                <option th:value="-1">-- Select Account No --</option>
+                                <option th:each="i : ${dropDrownList}" th:value="${i.accId}" th:text="${i.accName}">
+                                </option>
+                            </select>
+
+                            <a th:href="@{/account-form}" target="_blank">Add Account</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Address Detail</td>
+                        <td colspan="3">
+                            <textarea th:field="*{empAddress}" placeholder="Address..." title="description" cols="60" rows="3"></textarea>
+                        </td>
+                    </tr>               
+                    <tr>                    
+                        <td colspan="4" align="center">
+                            <button >Save</button>
+                        </td>                                        
+                    </tr>
+
+                </table>
+            </form>
+             <br/>
+            <table  border="1" width="90%" align="center" cellpadding="5">
+                <tr>
+                    <td style="font-size: 20px; font-weight: bold" colspan="8">Employee List</td>
+                </tr>
+                <tr>
+                    <th>SR</th>
+                    <th hidden>Id</th>
+                    <th>Employee Id</th>
+                    <th>NAME</th>
+                    <th>Grade</th>
+                    <th>Mobile</th>
+                    <th>Account No</th>
+                    <th>Address</th>
+                    <th>ACTION</th>
+                </tr>
+                <tr th:each="inst,itr : ${empList}">
+                    <td th:text="${itr.count}">SR</td>
+                    <td hidden th:text="${inst.id}">ID</td>
+                    <td th:text="${inst.employeeId}">Employee Id</td>
+                    <td th:text="${inst.employeeName}">NAME</td>
+                    <td th:text="${inst.empGrade}">Grade</td>
+                    <td th:text="${inst.empMobile}">Mobile</td>
+                    <td th:text="${inst.accountId}">Account No</td>
+                    <td th:text="${inst.empAddress}">Address</td>
+                    <td><a th:href="@{'/employee-edit/'+${inst.id}}">Edit</a> | <a th:href="@{'/employee-delete/'+${inst.id}}">Delete</a></td>
+                </tr>
+            </table>
+
+        </div>
+    </body>
+</html>

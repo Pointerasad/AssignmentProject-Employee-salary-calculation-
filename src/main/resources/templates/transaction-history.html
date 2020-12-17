@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Transactin History List</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>               
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <table  border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td style="font-size: 20px ;text-align: center; font-weight: bold" colspan="9">Transactin History List</td>
+            </tr>
+                <tr>
+                    <td style="font-size: 15px; text-align: center" colspan="5">From Account details</td>
+                    <td style="font-size: 15px;  text-align: center" colspan="1">Transfer</td>
+                    <td style="font-size: 15px;  text-align: center" colspan="3">To Account details</td>
+                </tr>
+            <tr>
+                <th>SR</th>
+                <th>From Account No</th>
+                <th>Transfer Date</th>
+                <th>Available Amount</th>
+                <th>Current Balance</th>
+                <th>Transfer Amount</th>
+                <th>Transfer Account No</th>
+                <th>Transfer Account Name</th>
+                <th>To Current Balance</th>
+            </tr>    
+            <tr th:each="inst,itr : ${historyList}">
+                <td th:text="${itr.count}">SR</td>
+                <td th:text="${inst.accountNo}">From Account No</td>
+                <td th:text="${inst.pDate}">Transfer Date</td>
+                <td th:text="${inst.availableAmt}">Available Amount</td>
+                <td th:text="${inst.currentBalance}">Current Balance</td>
+                <td th:text="${inst.transferAmt}">Transfer Amount</td>
+                <td th:text="${inst.clientAccountNo}">Transfer Account No</td>
+                <td th:text="${inst.accountName}">Transfer Account Name</td>
+                <td th:text="${inst.currentBal}">To Current Balance</td>
+            </tr> 
+        </table>
+        </div>
+    </body>
+</html>

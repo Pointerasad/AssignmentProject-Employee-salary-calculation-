@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Transfer Salary Form</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>
+        <script th:src="@{/transfer-salary.js}"></script>
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <form th:action="@{/save-transfer-salary}" th:object="${cmd}">
+                <table border="1" width="90%" align="center" cellpadding="5">
+                    <tr>
+                        <td class="fheading"  colspan="4">Transfer Salary Form</td>
+                    </tr>
+
+                    <tr>
+                        <td class="fheading"  colspan="4">Form</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Account Number</td>
+                        <td>
+                            <input type="text" id="accountId" th:field="*{accountNo}" placeholder="Enter Account No" required>
+                            <input type="hidden" th:field="*{id}"/>
+                        </td>
+                        <td>Account Name</td>
+                        <td>
+                            <input type="text" id="clientAccName" th:field="*{clientAccountName}" readonly/>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>Currency</td>
+                        <td>
+                            <input type="text" id="currency" th:field="*{cCurrency}" placeholder="BDT" readonly/>
+                        </td>
+                        <td>Available Balance</td>
+                        <td>
+                            <input type="text" th:field="*{avalBalance}" id="avBalance" readonly/>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>Transfer Amount</td>
+                        <td><input type="text" th:field="*{transferAmt}" required /></td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="fheading"  colspan="4">To</td>
+                    </tr>
+
+                    <tr>
+
+                        <td>Transfer Account No</td>
+                        <td>
+                            <input type="number" th:field="*{clientAccountNo}" required/>
+                        </td>
+
+                        <td>Account Name</td>
+                        <td>
+                            <input type="text"  th:field="*{clientAccountName}" />
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td> Currency</td>
+                        <td>
+                            <input type="text" th:field="*{clientCurrency}" placeholder="BDT" />
+                        </td>
+
+                        <!--<td>Employee Amount</td>-->
+                        <!--<td>-->
+                            <!--<input type="text" th:field="*{clientAmt}"/>-->
+                        <!--</td>-->
+
+                    </tr>
+
+                    <tr>                    
+                        <td colspan="4" align="center">
+                            <button style="width: 120px">Transfer Amount</button>
+                        </td>                                        
+                    </tr>
+
+                </table>
+            </form>
+            <br/>
+        </div>
+
+
+    </body>
+</html>

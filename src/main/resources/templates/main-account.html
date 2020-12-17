@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Company Account Form</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>               
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <form th:action="@{/save-main-account}" th:object="${cmd}">
+                <table border="1" width="90%" align="center" cellpadding="5">     
+                    <tr>
+                        <td class="fheading"  colspan="4">Company Account Form</td>
+                    </tr>
+                    <tr>
+                        <td>Account No</td>
+                        <td>
+                            <input type="text" th:field="*{accountNo}" required/>
+                            <input type="hidden" th:field="*{id}"/>
+                        </td>
+
+                        <td>Account Name</td>
+                        <td>
+                            <input type="text" th:field="*{accountName}" required/>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>Current Balance</td>
+                        <td><input type="text" th:field="*{currentBalance}" required /></td>
+
+                    </tr>
+
+                    <tr>                    
+                        <td colspan="4" align="center">
+                            <button >Save</button>
+                        </td>                                        
+                    </tr>
+
+                </table>
+            </form>
+
+            <br/>
+
+            <table border="1" width="90%" align="center" cellpadding="5">
+                <tr>
+                    <th>SR</th>
+                    <th>ID</th>
+                    <th>Account No</th>
+                    <th>Account Name</th>
+                    <th>Current Balance</th>
+                    <th>ACTION</th>
+                </tr>
+                <tr th:each="c,itr: ${mainList}">
+                    <td th:text="${itr.count}">SR</td>
+                    <td th:text="${c.id}">ID</td>
+                    <td th:text="${c.accountNo}">Account No</td>
+                    <td th:text="${c.accountName}">Account Name</td>
+                    <td th:text="${c.currentBalance}">Current Balance</td>
+                    <td><a th:href="@{'/main-account-delete/'+${c.id}}">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

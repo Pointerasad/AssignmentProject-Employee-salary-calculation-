@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Employee List</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>               
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <table  border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td style="font-size: 20px; font-weight: bold" colspan="8">Employee List</td>
+            </tr>
+            <tr>
+                <th>SR</th>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>Grade</th>
+                <th>Mobile</th>
+                <th>Account No</th>
+                <th>Address</th>
+                <th>ACTION</th>
+            </tr>    
+            <tr th:each="inst,itr : ${empList}">
+                <td th:text="${itr.count}">SR</td>
+                <td th:text="${inst.id}">ID</td>
+                <td th:text="${inst.employeeName}">NAME</td>
+                <td th:text="${inst.empGrade}">Grade</td>
+                <td th:text="${inst.empMobile}">Mobile</td>
+                <td th:text="${inst.accountId}">Account No</td>
+                <td th:text="${inst.empAddress}">Address</td>
+                <td><a th:href="@{'/employee-edit/'+${inst.id}}">Edit</a> | <a th:href="@{'/employee-delete/'+${inst.id}}">Delete</a></td>
+            </tr> 
+        </table>
+        </div>
+    </body>
+</html>

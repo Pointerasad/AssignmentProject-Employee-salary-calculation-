@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Bank</title>
+        <meta charset="UTF-8">        
+        <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+        <script th:src="@{/jquery-3.4.1.min.js}"></script>               
+    </head>
+    <body>
+
+        <div th:insert="menu"></div>
+
+        <div class="main">
+            <div th:insert="header"></div>
+
+            <form th:action="@{/save-bank}" th:object="${cmd}">
+                <table border="1" width="90%" align="center" cellpadding="5">     
+                    <tr>
+                        <td class="fheading" colspan="3">Bank</td>
+                    </tr>
+                    <tr>                       
+                        <td align="right">Enter Bank Name
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{bankName}" />
+                            <input type="hidden" th:field="*{id}" />
+                            
+                            <span class="txt_small"></span>
+                        </td>    
+                        <td width="40%">
+                            <button >Save</button>
+                        </td> 
+                    </tr>
+                </table>
+            </form>
+            <br/>
+
+            <table border="1" width="90%" align="center" cellpadding="5">                         
+                <tr>                       
+                    <th>SR</th>
+                    <th>ID</th>
+                    <th>SOURCE</th>                        
+                    <th>ACTION</th>                        
+                </tr>
+                <tr th:each="es,itr: ${bankList}">
+                    <td th:text="${itr.count}">SR</td>
+                    <td th:text="${es.id}">ID</td>
+                    <td th:text="${es.bankName}">SOURCE</td>
+                    <td> <a th:href="@{'/bank-edit/'+${es.id}}">Edit</a> | <a th:href="@{'/bank-delete/'+${es.id}}">Delete</a></td>
+                </tr>
+            </table>
+
+
+
+
+
+        </div>
+    </body>
+</html>
